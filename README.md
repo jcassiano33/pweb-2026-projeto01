@@ -6,4 +6,4 @@ Siga as instruções do [slide](https://dvcirilo-ifrn.github.io/pweb/slides/aula
 
 ## Equipe
 - Gustavo Ivo
-- Pessoa 2
+- José Cassiano
