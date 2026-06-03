@@ -19,7 +19,7 @@ def equipe(request):
          "nacionalidade": "Português",
         },
 
-        {"foto": "topplayers/assets/img/equipe/gabrielguimalhães.png",
+        {"foto": "topplayers/assets/img/equipe/gabrielmagalhães.png",
          "nome": "Gabriel Magalhães",
          "idade": "28",
          "posição": "Zagueiro",
