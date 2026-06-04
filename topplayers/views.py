@@ -62,6 +62,7 @@ def equipe(request):
          "posição": "Meia ligação",
          "nacionalidade": "Espanhol",
         },
+
         {"foto": "topplayers/assets/img/equipe/vinijr.png",
          "nome": "Vinícius Júnior",
          "idade": 25,
@@ -91,7 +92,7 @@ def equipe(request):
         },
     ]
 
-    
+    return render(request, "topplayers/equipe.html")
 
 def sobre(request):
     sobre = {
@@ -125,4 +126,13 @@ def sobre(request):
         "autores": autores,
         "equipe": equipe,
     }
+
     return render(request, "topplayers/sobre.html", context)
+
+def info (request):
+    info = {
+    "nome": "Top Players",
+    "descricao": "Veja os melhores jogadores da Copa do Mundo deste ano aqui!",
+    "autores": ["Gustavo Ivo", "José Cassiano"],
+}
+    return render(request)

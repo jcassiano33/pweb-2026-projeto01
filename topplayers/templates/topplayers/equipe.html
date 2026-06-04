@@ -1,123 +1,12 @@
 {% extends 'topplayers/base.html' %}
 {% load static %}
-{% block 'content' %}
 
-  <style>
-    /* PAGE HEADER */
-    .page-header {
-      background: linear-gradient(135deg, var(--dark2) 0%, #18120a 100%);
-      padding: 4rem 0 3rem;
-      border-bottom: 1px solid rgba(201,168,76,.15);
-      position: relative;
-      overflow: hidden;
-    }
-    .page-header::before {
-      content: 'EQUIPE';
-      position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(6rem, 14vw, 12rem);
-      color: rgba(201,168,76,.05);
-      pointer-events: none; white-space: nowrap;
-    }
-    .section-label { font-family:'Bebas Neue',sans-serif; letter-spacing:.15em; color:var(--gold); font-size:.85rem; }
-    .section-title { font-size:clamp(2rem,5vw,3.5rem); line-height:1; margin-bottom:1rem; }
-    .gold-line { display:block; width:60px; height:3px; background:linear-gradient(90deg,var(--gold),transparent); margin:.75rem 0 1.5rem; }
-    .text-gold { color: var(--gold) !important; }
-    .text-muted-custom { color: var(--muted) !important; }
+{% block titulo %}Equipe{% endblock %}
 
-    /* FILTER TABS */
-    .filter-tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.5rem; }
-    .filter-btn {
-      font-family: 'Bebas Neue', sans-serif; letter-spacing: .08em;
-      border: 1px solid rgba(201,168,76,.25); background: transparent;
-      color: var(--muted); padding: .35rem 1.1rem; font-size: .95rem;
-      border-radius: 2px; cursor: pointer; transition: all .2s;
-    }
-    .filter-btn:hover, .filter-btn.active {
-      border-color: var(--gold); color: var(--gold);
-      background: rgba(201,168,76,.08);
-    }
-
-    /* PLAYER CARD */
-    .player-card {
-      background: var(--dark2);
-      border: 1px solid rgba(201,168,76,.12);
-      border-radius: 6px;
-      overflow: hidden;
-      transition: transform .3s, border-color .3s, box-shadow .3s;
-      height: 100%;
-      display: flex; flex-direction: column;
-    }
-    .player-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--gold);
-      box-shadow: 0 20px 40px rgba(0,0,0,.4), 0 0 20px rgba(201,168,76,.1);
-    }
-    .card-avatar-area {
-      position: relative;
-      background: var(--dark3);
-      padding: 2rem 1.5rem 1rem;
-      text-align: center;
-    }
-    .card-number {
-      position: absolute; top: .75rem; left: 1rem;
-      font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem;
-      color: rgba(201,168,76,.15); line-height: 1; user-select: none;
-    }
-    .card-avatar {
-      width: 100px; height: 100px;
-      border-radius: 50%;
-      border: 3px solid var(--gold);
-      background: var(--dark);
-      margin: 0 auto;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.2rem; color: var(--gold);
-      box-shadow: 0 0 0 6px rgba(201,168,76,.08);
-      overflow: hidden;
-    }
-    .card-avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .card-position-badge {
-      display: inline-block;
-      background: rgba(201,168,76,.1);
-      border: 1px solid rgba(201,168,76,.3);
-      color: var(--gold-lt);
-      font-family: 'Bebas Neue', sans-serif;
-      letter-spacing: .1em; font-size: .78rem;
-      padding: .2rem .7rem; border-radius: 2px; margin-top: .75rem;
-    }
-    .card-flag { font-size: 1.5rem; margin-top: .5rem; }
-    .card-body-custom { padding: 1.25rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
-    .card-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem; letter-spacing: .04em;
-      line-height: 1.1; color: var(--light);
-      margin-bottom: .25rem;
-    }
-    .card-country { color: var(--muted); font-size: .85rem; margin-bottom: 1rem; }
-    .card-stats { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-top: auto; }
-    .card-stat {
-      background: var(--dark3); border: 1px solid rgba(201,168,76,.08);
-      border-radius: 4px; padding: .5rem .75rem;
-    }
-    .card-stat-value { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--gold); }
-    .card-stat-label { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
-    .card-bio { font-size: .88rem; color: var(--muted); line-height: 1.55; margin: .75rem 0 1rem; flex: 1; }
-    .card-club-badge {
-      display: flex; align-items: center; gap: .5rem;
-      border-top: 1px solid rgba(201,168,76,.08);
-      padding-top: .75rem; margin-top: auto;
-      font-size: .85rem; color: var(--muted);
-    }
-    .card-club-badge i { color: var(--gold); }
-
-    /* REVEAL */
-    .reveal { opacity:0; transform:translateY(30px); transition:opacity .55s ease,transform .55s ease; }
-    .reveal.visible { opacity:1; transform:none; }
-  </style>
+{% block content %}
 
   <!-- PAGE HEADER -->
-  <div class="page-header">
+  <div class="page-header page-header--equipe">
     <div class="container">
       <div class="section-label">Copa do Mundo 2026</div>
       <h1 class="section-title">EQUIPE DE <span class="text-gold">ESTRELAS</span></h1>
@@ -130,10 +19,10 @@
   </div>
 
   <!-- PLAYERS GRID -->
-  <section style="padding: 4rem 0;">
+  <section class="py-5">
     <div class="container">
 
-      <!-- Filter -->
+      <!-- Filter tabs -->
       <div class="filter-tabs" id="filterTabs">
         <button class="filter-btn active" data-filter="all">Todos</button>
         <button class="filter-btn" data-filter="atacante">Atacantes</button>
@@ -426,28 +315,8 @@
           </div>
         </div>
 
-      </div>
+      </div><!-- /#playersGrid -->
     </div>
   </section>
-
-  <script>
-    // Filter
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.player-item').forEach(item => {
-          item.style.display = (filter === 'all' || item.dataset.pos === filter) ? '' : 'none';
-        });
-      });
-    });
-
-    // Reveal
-    const revealObserver = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-  </script>
 
 {% endblock %}
