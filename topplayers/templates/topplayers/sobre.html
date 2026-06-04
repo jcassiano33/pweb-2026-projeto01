@@ -81,7 +81,7 @@
         <div class="col-sm-6 col-lg-4 reveal">
           <div class="author-card">
             <div class="author-avatar-area">
-              <div class="author-avatar">{{ autor.iniciais }}</div>
+              <div class="author-avatar">{{ autor.foto }}</div>
               <div class="author-role-badge">{{ autor.papel }}</div>
             </div>
             <div class="author-body">
@@ -103,7 +103,7 @@
         <h2 class="section-title">OS JOGADORES <span class="text-gold">DO SITE</span></h2>
         <span class="gold-line mx-auto"></span>
         <p class="text-muted-custom mx-auto" style="max-width:520px;">
-          Confira os {{ equipe|length }} nomes que compõem o elenco selecionado para este projeto.
+          Confira os 11 nomes que compõem o elenco selecionado para este projeto.
         </p>
       </div>
 
@@ -134,47 +134,11 @@
     </div>
   </section>
 
-  <!-- ── TECNOLOGIAS ──────────────────────────────────────────── -->
-  <section class="tech-section">
-    <div class="container">
-      <div class="row align-items-center gy-5">
-        <div class="col-lg-5 reveal">
-          <div class="section-label">Tecnologias</div>
-          <h2 class="section-title">FEITO COM <span class="text-gold">DEDICAÇÃO</span></h2>
-          <span class="gold-line"></span>
-          <p class="text-muted-custom">
-            O site foi construído com ferramentas modernas de desenvolvimento web,
-            combinando um back-end robusto em Django com um front-end responsivo e
-            estilizado em Bootstrap.
-          </p>
-          <p class="text-muted-custom mt-3">
-            Criado em <strong class="text-gold">{{ sobre.ano }}</strong> como
-            projeto da disciplina de <strong class="text-gold">{{ sobre.disciplina }}</strong>.
-          </p>
-        </div>
-        <div class="col-lg-6 offset-lg-1 reveal reveal-delay-1">
-          <div class="d-flex flex-wrap">
-            {% for tech in tecnologias %}
-            <span class="tech-pill">
-              <i class="{{ tech.icone }}"></i> {{ tech.nome }}
-            </span>
-            {% endfor %}
-          </div>
-          <div class="tech-terminal mt-4">
-            <span class="tech-terminal__prompt">$</span> python manage.py runserver<br>
-            <span class="tech-terminal__output">→ Watching for file changes with StatReloader</span><br>
-            <span class="tech-terminal__output">→ Starting development server at http://127.0.0.1:8000/</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ── COPYRIGHT ───────────────────────────────────────────── -->
   <section class="copyright-strip">
     <div class="container text-center reveal">
       <p class="text-muted-custom">
-        &copy; {{ sobre.ano }} <span class="text-gold">Top Players</span> —
+        &copy; 2026 <span class="text-gold">Top Players</span> —
         Desenvolvido por
         {% for autor in autores %}
           <strong>{{ autor.nome }}</strong>{% if not forloop.last %}, {% endif %}
