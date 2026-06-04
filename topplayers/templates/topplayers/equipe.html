@@ -1,30 +1,453 @@
 {% extends 'topplayers/base.html' %}
 {% load static %}
-
 {% block 'content' %}
-                <!-- Portfolio Grid-->
-        <section class="page-section bg-light" id="portfolio">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Portfolio</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 1-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/1.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Threads</div>
-                                <div class="portfolio-caption-subheading text-muted">Illustration</div>
-                            </div>
-                     {% endfor %}
-                </div>
+
+  <style>
+    /* PAGE HEADER */
+    .page-header {
+      background: linear-gradient(135deg, var(--dark2) 0%, #18120a 100%);
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid rgba(201,168,76,.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: 'EQUIPE';
+      position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(6rem, 14vw, 12rem);
+      color: rgba(201,168,76,.05);
+      pointer-events: none; white-space: nowrap;
+    }
+    .section-label { font-family:'Bebas Neue',sans-serif; letter-spacing:.15em; color:var(--gold); font-size:.85rem; }
+    .section-title { font-size:clamp(2rem,5vw,3.5rem); line-height:1; margin-bottom:1rem; }
+    .gold-line { display:block; width:60px; height:3px; background:linear-gradient(90deg,var(--gold),transparent); margin:.75rem 0 1.5rem; }
+    .text-gold { color: var(--gold) !important; }
+    .text-muted-custom { color: var(--muted) !important; }
+
+    /* FILTER TABS */
+    .filter-tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.5rem; }
+    .filter-btn {
+      font-family: 'Bebas Neue', sans-serif; letter-spacing: .08em;
+      border: 1px solid rgba(201,168,76,.25); background: transparent;
+      color: var(--muted); padding: .35rem 1.1rem; font-size: .95rem;
+      border-radius: 2px; cursor: pointer; transition: all .2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--gold); color: var(--gold);
+      background: rgba(201,168,76,.08);
+    }
+
+    /* PLAYER CARD */
+    .player-card {
+      background: var(--dark2);
+      border: 1px solid rgba(201,168,76,.12);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+      height: 100%;
+      display: flex; flex-direction: column;
+    }
+    .player-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold);
+      box-shadow: 0 20px 40px rgba(0,0,0,.4), 0 0 20px rgba(201,168,76,.1);
+    }
+    .card-avatar-area {
+      position: relative;
+      background: var(--dark3);
+      padding: 2rem 1.5rem 1rem;
+      text-align: center;
+    }
+    .card-number {
+      position: absolute; top: .75rem; left: 1rem;
+      font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem;
+      color: rgba(201,168,76,.15); line-height: 1; user-select: none;
+    }
+    .card-avatar {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      background: var(--dark);
+      margin: 0 auto;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem; color: var(--gold);
+      box-shadow: 0 0 0 6px rgba(201,168,76,.08);
+      overflow: hidden;
+    }
+    .card-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .card-position-badge {
+      display: inline-block;
+      background: rgba(201,168,76,.1);
+      border: 1px solid rgba(201,168,76,.3);
+      color: var(--gold-lt);
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: .1em; font-size: .78rem;
+      padding: .2rem .7rem; border-radius: 2px; margin-top: .75rem;
+    }
+    .card-flag { font-size: 1.5rem; margin-top: .5rem; }
+    .card-body-custom { padding: 1.25rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem; letter-spacing: .04em;
+      line-height: 1.1; color: var(--light);
+      margin-bottom: .25rem;
+    }
+    .card-country { color: var(--muted); font-size: .85rem; margin-bottom: 1rem; }
+    .card-stats { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-top: auto; }
+    .card-stat {
+      background: var(--dark3); border: 1px solid rgba(201,168,76,.08);
+      border-radius: 4px; padding: .5rem .75rem;
+    }
+    .card-stat-value { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--gold); }
+    .card-stat-label { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+    .card-bio { font-size: .88rem; color: var(--muted); line-height: 1.55; margin: .75rem 0 1rem; flex: 1; }
+    .card-club-badge {
+      display: flex; align-items: center; gap: .5rem;
+      border-top: 1px solid rgba(201,168,76,.08);
+      padding-top: .75rem; margin-top: auto;
+      font-size: .85rem; color: var(--muted);
+    }
+    .card-club-badge i { color: var(--gold); }
+
+    /* REVEAL */
+    .reveal { opacity:0; transform:translateY(30px); transition:opacity .55s ease,transform .55s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+  </style>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="container">
+      <div class="section-label">Copa do Mundo 2026</div>
+      <h1 class="section-title">EQUIPE DE <span class="text-gold">ESTRELAS</span></h1>
+      <span class="gold-line"></span>
+      <p class="text-muted-custom" style="max-width:520px;">
+        Conheça os 10 jogadores que prometem ser os grandes protagonistas do maior
+        torneio de futebol do planeta. Perfil completo, estatísticas e curiosidades.
+      </p>
+    </div>
+  </div>
+
+  <!-- PLAYERS GRID -->
+  <section style="padding: 4rem 0;">
+    <div class="container">
+
+      <!-- Filter -->
+      <div class="filter-tabs" id="filterTabs">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="atacante">Atacantes</button>
+        <button class="filter-btn" data-filter="meia">Meias</button>
+        <button class="filter-btn" data-filter="zagueiro">Zagueiros</button>
+        <button class="filter-btn" data-filter="lateral">Laterais</button>
+        <button class="filter-btn" data-filter="goleiro">Goleiros</button>
+        <button class="filter-btn" data-filter="volante">Volantes</button>
+      </div>
+
+      <div class="row g-4" id="playersGrid">
+
+        <!-- 1. LAMINE YAMAL -->
+        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="atacante">
+          <div class="player-card">
+            <div class="card-avatar-area">
+              <div class="card-number">11</div>
+              <div class="card-avatar">LY</div>
+              <div class="card-position-badge">Atacante</div>
+              <div class="card-flag">🇪🇸</div>
             </div>
-        </section>
+            <div class="card-body-custom">
+              <div class="card-name">Lamine Yamal</div>
+              <div class="card-country">Espanha · FC Barcelona</div>
+              <div class="card-stats">
+                <div class="card-stat"><div class="card-stat-value">17</div><div class="card-stat-label">Idade</div></div>
+                <div class="card-stat"><div class="card-stat-value">Mataró, ESP</div><div class="card-stat-label">Nascimento</div></div>
+                <div class="card-stat"><div class="card-stat-value">Ponta Dir.</div><div class="card-stat-label">Posição</div></div>
+                <div class="card-stat"><div class="card-stat-value">1.79m</div><div class="card-stat-label">Altura</div></div>
+              </div>
+              <p class="card-bio">
+                O maior prodígio do futebol mundial. Aos 16 anos foi campeão europeu com a Espanha e eleito o melhor jovem da Euro 2024. Velocidade, dribles e visão de jogo fora do comum.
+              </p>
+              <div class="card-club-badge">
+                <i class="bi bi-shield-fill"></i> FC Barcelona — La Liga
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. KYLIAN MBAPPÉ -->
+        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="atacante">
+          <div class="player-card">
+            <div class="card-avatar-area">
+              <div class="card-number">10</div>
+              <div class="card-avatar">KM</div>
+              <div class="card-position-badge">Atacante</div>
+              <div class="card-flag">🇫🇷</div>
+            </div>
+            <div class="card-body-custom">
+              <div class="card-name">Kylian Mbappé</div>
+              <div class="card-country">França · Real Madrid</div>
+              <div class="card-stats">
+                <div class="card-stat"><div class="card-stat-value">26</div><div class="card-stat-label">Idade</div></div>
+                <div class="card-stat"><div class="card-stat-value">Paris, FRA</div><div class="card-stat-label">Nascimento</div></div>
+                <div class="card-stat"><div class="card-stat-value">Centroavante</div><div class="card-stat-label">Posição</div></div>
+                <div class="card-stat"><div class="card-stat-value">1.78m</div><div class="card-stat-label">Altura</div></div>
+              </div>
+              <p class="card-bio">
+                Um dos jogadores mais rápidos da história do futebol. Campeão mundial em 2018, artilheiro da Copa de 2022. No Real Madrid, busca completar o hall dos maiores de todos os tempos.
+              </p>
+              <div class="card-club-badge">
+                <i class="bi bi-shield-fill"></i> Real Madrid — La Liga
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. VINÍCIUS JR. -->
+        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="atacante">
+          <div class="player-card">
+            <div class="card-avatar-area">
+              <div class="card-number">7</div>
+              <div class="card-avatar">VJ</div>
+              <div class="card-position-badge">Atacante</div>
+              <div class="card-flag">🇧🇷</div>
+            </div>
+            <div class="card-body-custom">
+              <div class="card-name">Vinícius Jr.</div>
+              <div class="card-country">Brasil · Real Madrid</div>
+              <div class="card-stats">
+                <div class="card-stat"><div class="card-stat-value">24</div><div class="card-stat-label">Idade</div></div>
+                <div class="card-stat"><div class="card-stat-value">São Gonçalo, BRA</div><div class="card-stat-label">Nascimento</div></div>
+                <div class="card-stat"><div class="card-stat-value">Ponta Esq.</div><div class="card-stat-label">Posição</div></div>
+                <div class="card-stat"><div class="card-stat-value">1.76m</div><div class="card-stat-label">Altura</div></div>
+              </div>
+              <p class="card-bio">
+                A maior esperança brasileira para o hexacampeonato. Venceu duas Champions League pelo Real Madrid. Velocidade devastadora e dribles inigualáveis fazem dele o craque da América do Sul.
+              </p>
+              <div class="card-club-badge">
+                <i class="bi bi-shield-fill"></i> Real Madrid — La Liga
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. VITINHA -->
+        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="meia">
+          <div class="player-card">
+            <div class="card-avatar-area">
+              <div class="card-number">8</div>
+              <div class="card-avatar">VI</div>
+              <div class="card-position-badge">Meia</div>
+              <div class="card-flag">🇵🇹</div>
+            </div>
+            <div class="card-body-custom">
+              <div class="card-name">Vitinha</div>
+              <div class="card-country">Portugal · Paris Saint-Germain</div>
+              <div class="card-stats">
+                <div class="card-stat"><div class="card-stat-value">24</div><div class="card-stat-label">Idade</div></div>
+                <div class="card-stat"><div class="card-stat-value">Braga, POR</div><div class="card-stat-label">Nascimento</div></div>
+                <div class="card-stat"><div class="card-stat-value">Meia-Centro</div><div class="card-stat-label">Posição</div></div>
+                <div class="card-stat"><div class="card-stat-value">1.72m</div><div class="card-stat-label">Altura</div></div>
+              </div>
+              <p class="card-bio">
+                Motor do PSG e peça fundamental de Portugal. Com toque apurado e visão de jogo, Vitinha é o maestro que organiza e distribui o jogo com elegância e precisão cirúrgica.
+              </p>
+              <div class="card-club-badge">
+                <i class="bi bi-shield-fill"></i> Paris Saint-Germain — Ligue 1
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. DECLAN RICE -->
+        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="volante">
+          <div class="player-card">
+            <div class="card-avatar-area">
+              <div class="card-number">4</div>
+              <div class="card-avatar">DR</div>
+              <div class="card-position-badge">Volante</div>
+              <div class="card-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div>
+            </div>
+            <div class="card-body-custom">
+              <div class="card-name">Declan Rice</div>
+              <div class="card-country">Inglaterra · Arsenal FC</div>
+              <div class="card-stats">
+                <div class="card-stat"><div class="card-stat-value">26</div><div class="card-stat-label">Idade</div></div>
+                <div class="card-stat"><div class="card-stat-value">Kingston, ENG</div><div class="card-stat-label">Nascimento</div></div>
+                <div class="card-stat"><div class="card-stat-value">Volante</div><div class="card-stat-label">Posição</div></div>
+                <div class="card-stat"><div class="card-stat-value">1.85m</div><div class="card-stat-label">Altura</div></div>
+              </div>
+              <p class="card-bio">
+                Capitão do Arsenal e pilar da seleção inglesa. Considerado o melhor volante da Premier League, Rice une poder físico, leitura de jogo e capacidade de distribuição fora do comum.
+              </p>
+              <div class="card-club-badge">
+                <i class="bi bi-shield-fill"></i> Arsenal FC — Premier League
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. PEDRI -->
+        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="meia">
+          <div class="player-card">
+            <div class="card-avatar-area">
+              <div class="card-number">8</div>
+              <div class="card-avatar">PE</div>
+              <div class="card-position-badge">Meia</div>
+              <div class="card-flag">🇪🇸</div>
+            </div>
+            <div class="card-body-custom">
+              <div class="card-name">Pedri</div>
+              <div class="card-country">Espanha · FC Barcelona</div>
+              <div class="card-stats">
+                <div class="card-stat"><div class="card-stat-value">22</div><div class="card-stat-label">Idade</div></div>
+                <div class="card-stat"><div class="card-stat-value">Tegueste, ESP</div><div class="card-stat-label">Nascimento</div></div>
+                <div class="card-stat"><div class="card-stat-value">Meia-Centro</div><div class="card-stat-label">Posição</div></div>
+                <div class="card-stat"><div class="card-stat-value">1.74m</div><div class="card-stat-label">Altura</div></div>
+              </div>
+              <p class="card-bio">
+                Herdeiro de Iniesta no Barcelona e na seleção espanhola. Com apenas 22 anos, Pedri já é bicampeão europeu e referência técnica do futebol mundial pelo seu estilo refinado e inteligente.
+              </p>
+              <div class="card-club-badge">
+                <i class="bi bi-shield-fill"></i> FC Barcelona — La Liga
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. ACHRAF HAKIMI -->
+        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="lateral">
+          <div class="player-card">
+            <div class="card-avatar-area">
+              <div class="card-number">2</div>
+              <div class="card-avatar">AH</div>
+              <div class="card-position-badge">Lateral</div>
+              <div class="card-flag">🇲🇦</div>
+            </div>
+            <div class="card-body-custom">
+              <div class="card-name">Achraf Hakimi</div>
+              <div class="card-country">Marrocos · Paris Saint-Germain</div>
+              <div class="card-stats">
+                <div class="card-stat"><div class="card-stat-value">26</div><div class="card-stat-label">Idade</div></div>
+                <div class="card-stat"><div class="card-stat-value">Madri, ESP</div><div class="card-stat-label">Nascimento</div></div>
+                <div class="card-stat"><div class="card-stat-value">Lateral Dir.</div><div class="card-stat-label">Posição</div></div>
+                <div class="card-stat"><div class="card-stat-value">1.81m</div><div class="card-stat-label">Altura</div></div>
+              </div>
+              <p class="card-bio">
+                O melhor lateral da atualidade. Hakimi liderou Marrocos até as semifinais em 2022, feito histórico para a África. No PSG, é devastador pelos flancos com velocidade e qualidade técnica.
+              </p>
+              <div class="card-club-badge">
+                <i class="bi bi-shield-fill"></i> Paris Saint-Germain — Ligue 1
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. GABRIEL MAGALHÃES -->
+        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="zagueiro">
+          <div class="player-card">
+            <div class="card-avatar-area">
+              <div class="card-number">6</div>
+              <div class="card-avatar">GM</div>
+              <div class="card-position-badge">Zagueiro</div>
+              <div class="card-flag">🇧🇷</div>
+            </div>
+            <div class="card-body-custom">
+              <div class="card-name">Gabriel Magalhães</div>
+              <div class="card-country">Brasil · Arsenal FC</div>
+              <div class="card-stats">
+                <div class="card-stat"><div class="card-stat-value">27</div><div class="card-stat-label">Idade</div></div>
+                <div class="card-stat"><div class="card-stat-value">São Paulo, BRA</div><div class="card-stat-label">Nascimento</div></div>
+                <div class="card-stat"><div class="card-stat-value">Zagueiro</div><div class="card-stat-label">Posição</div></div>
+                <div class="card-stat"><div class="card-stat-value">1.90m</div><div class="card-stat-label">Altura</div></div>
+              </div>
+              <p class="card-bio">
+                Zagueiro mais dominante da Premier League nos últimos anos. Gabriel une força física, liderança e qualidade técnica. Com a Seleção Brasileira, é peça indispensável na busca pelo hexa.
+              </p>
+              <div class="card-club-badge">
+                <i class="bi bi-shield-fill"></i> Arsenal FC — Premier League
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. WILLIAM SALIBA -->
+        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="zagueiro">
+          <div class="player-card">
+            <div class="card-avatar-area">
+              <div class="card-number">12</div>
+              <div class="card-avatar">WS</div>
+              <div class="card-position-badge">Zagueiro</div>
+              <div class="card-flag">🇫🇷</div>
+            </div>
+            <div class="card-body-custom">
+              <div class="card-name">William Saliba</div>
+              <div class="card-country">França · Arsenal FC</div>
+              <div class="card-stats">
+                <div class="card-stat"><div class="card-stat-value">23</div><div class="card-stat-label">Idade</div></div>
+                <div class="card-stat"><div class="card-stat-value">Bondy, FRA</div><div class="card-stat-label">Nascimento</div></div>
+                <div class="card-stat"><div class="card-stat-value">Zagueiro</div><div class="card-stat-label">Posição</div></div>
+                <div class="card-stat"><div class="card-stat-value">1.92m</div><div class="card-stat-label">Altura</div></div>
+              </div>
+              <p class="card-bio">
+                Revelação que se tornou titular absoluto do Arsenal e da França. Com apenas 23 anos, Saliba já é considerado um dos melhores zagueiros do mundo por sua calma, leitura e imponência física.
+              </p>
+              <div class="card-club-badge">
+                <i class="bi bi-shield-fill"></i> Arsenal FC — Premier League
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. DAVID RAYA -->
+        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="goleiro">
+          <div class="player-card">
+            <div class="card-avatar-area">
+              <div class="card-number">1</div>
+              <div class="card-avatar">DR</div>
+              <div class="card-position-badge">Goleiro</div>
+              <div class="card-flag">🇪🇸</div>
+            </div>
+            <div class="card-body-custom">
+              <div class="card-name">David Raya</div>
+              <div class="card-country">Espanha · Arsenal FC</div>
+              <div class="card-stats">
+                <div class="card-stat"><div class="card-stat-value">29</div><div class="card-stat-label">Idade</div></div>
+                <div class="card-stat"><div class="card-stat-value">Barcelona, ESP</div><div class="card-stat-label">Nascimento</div></div>
+                <div class="card-stat"><div class="card-stat-value">Goleiro</div><div class="card-stat-label">Posição</div></div>
+                <div class="card-stat"><div class="card-stat-value">1.83m</div><div class="card-stat-label">Altura</div></div>
+              </div>
+              <p class="card-bio">
+                Goleiro titular do Arsenal e da Espanha. Eleito melhor goleiro da Premier League, Raya se destaca pelos pés habilidosos — um goleiro moderno que participa ativamente da construção das jogadas.
+              </p>
+              <div class="card-club-badge">
+                <i class="bi bi-shield-fill"></i> Arsenal FC — Premier League
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Filter
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.player-item').forEach(item => {
+          item.style.display = (filter === 'all' || item.dataset.pos === filter) ? '' : 'none';
+        });
+      });
+    });
+
+    // Reveal
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+
 {% endblock %}

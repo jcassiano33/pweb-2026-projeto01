@@ -1,65 +1,344 @@
-{% extends 'website/base.html' %}
+{% extends 'topplayers/base.html' %}
+{% load static %}
 {% block 'content' %}
-        <!-- About-->
-        <section class="page-section" id="about">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">About</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-                <ul class="timeline">
-                    <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/1.jpg" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>2009-2011</h4>
-                                <h4 class="subheading">Our Humble Beginnings</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/2.jpg" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>March 2011</h4>
-                                <h4 class="subheading">An Agency is Born</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/3.jpg" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>December 2015</h4>
-                                <h4 class="subheading">Transition to Full Service</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/4.jpg" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>July 2020</h4>
-                                <h4 class="subheading">Phase Two Expansion</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image">
-                            <h4>
-                                Be Part
-                                <br />
-                                Of Our
-                                <br />
-                                Story!
-                            </h4>
-                        </div>
-                    </li>
-                </ul>
+
+  <style>
+    .text-gold { color: var(--gold) !important; }
+    .text-muted-custom { color: var(--muted) !important; }
+
+    /* PAGE HEADER */
+    .page-header {
+      background: linear-gradient(135deg, var(--dark2) 0%, #18120a 100%);
+      padding: 5rem 0 3.5rem;
+      border-bottom: 1px solid rgba(201,168,76,.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: 'SOBRE';
+      position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(6rem, 14vw, 12rem);
+      color: rgba(201,168,76,.05);
+      pointer-events: none; white-space: nowrap;
+    }
+    .section-label { font-family:'Bebas Neue',sans-serif; letter-spacing:.15em; color:var(--gold); font-size:.85rem; text-transform:uppercase; }
+    .section-title { font-size:clamp(2rem,5vw,3.5rem); line-height:1; margin-bottom:1rem; }
+    .gold-line { display:block; width:60px; height:3px; background:linear-gradient(90deg,var(--gold),transparent); margin:.75rem 0 1.5rem; }
+
+    /* INFO CARDS */
+    .info-section { padding: 5rem 0; background: var(--dark2); }
+    .info-card {
+      background: var(--dark3);
+      border: 1px solid rgba(201,168,76,.12);
+      border-radius: 6px; padding: 2rem; height: 100%;
+      transition: border-color .3s, transform .3s;
+    }
+    .info-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .info-icon {
+      width: 52px; height: 52px;
+      background: rgba(201,168,76,.1);
+      border: 1px solid rgba(201,168,76,.3);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; color: var(--gold); margin-bottom: 1.25rem;
+    }
+    .info-card h3 { font-size: 1.2rem; margin-bottom: .5rem; }
+
+    /* AUTHORS SECTION */
+    .authors-section { padding: 5rem 0; }
+    .author-card {
+      background: var(--dark2);
+      border: 1px solid rgba(201,168,76,.12);
+      border-radius: 6px; overflow: hidden;
+      transition: border-color .3s, transform .3s, box-shadow .3s;
+    }
+    .author-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,.4), 0 0 20px rgba(201,168,76,.1);
+    }
+    .author-avatar-area {
+      background: var(--dark3);
+      padding: 2rem 1.5rem 1.25rem;
+      text-align: center;
+    }
+    .author-avatar {
+      width: 88px; height: 88px; border-radius: 50%;
+      border: 3px solid var(--gold);
+      background: var(--dark);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem; color: var(--gold);
+      box-shadow: 0 0 0 6px rgba(201,168,76,.08);
+    }
+    .author-role-badge {
+      display: inline-block;
+      background: rgba(201,168,76,.1);
+      border: 1px solid rgba(201,168,76,.3);
+      color: var(--gold-lt);
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: .1em; font-size: .78rem;
+      padding: .2rem .7rem; border-radius: 2px; margin-top: .75rem;
+    }
+    .author-body { padding: 1.25rem 1.5rem 1.5rem; }
+    .author-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.35rem; letter-spacing: .04em;
+      color: var(--light); margin-bottom: .25rem;
+    }
+    .author-info { color: var(--muted); font-size: .88rem; line-height: 1.55; }
+
+    /* PLAYERS SECTION */
+    .players-section { padding: 5rem 0; background: var(--dark2); }
+    .player-row {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--dark3);
+      border: 1px solid rgba(201,168,76,.1);
+      border-radius: 6px; padding: .9rem 1.25rem;
+      transition: border-color .25s, transform .25s;
+    }
+    .player-row:hover { border-color: var(--gold); transform: translateX(4px); }
+    .player-row-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem; color: rgba(201,168,76,.2);
+      min-width: 2rem; text-align: center; line-height: 1;
+    }
+    .player-row-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 2px solid var(--gold);
+      background: var(--dark); overflow: hidden;
+      flex-shrink: 0;
+    }
+    .player-row-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .player-row-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem; letter-spacing: .04em;
+      color: var(--light); line-height: 1;
+    }
+    .player-row-pos {
+      font-size: .78rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .05em;
+    }
+    .player-row-badge {
+      margin-left: auto;
+      background: rgba(201,168,76,.08);
+      border: 1px solid rgba(201,168,76,.25);
+      color: var(--gold);
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: .07em; font-size: .8rem;
+      padding: .2rem .65rem; border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    /* TECH SECTION */
+    .tech-section { padding: 5rem 0; }
+    .tech-pill {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--dark3);
+      border: 1px solid rgba(201,168,76,.18);
+      border-radius: 50px; padding: .45rem 1.1rem;
+      margin: .3rem; font-size: .9rem; color: var(--muted);
+      transition: border-color .2s, color .2s;
+    }
+    .tech-pill i { color: var(--gold); }
+    .tech-pill:hover { border-color: var(--gold); color: var(--light); }
+
+    /* REVEAL */
+    .reveal { opacity:0; transform:translateY(30px); transition:opacity .55s ease,transform .55s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+    .reveal-delay-1 { transition-delay: .15s; }
+    .reveal-delay-2 { transition-delay: .3s; }
+    .reveal-delay-3 { transition-delay: .45s; }
+  </style>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="container">
+      <div class="section-label">Top Players · 2026</div>
+      <h1 class="section-title">SOBRE O <span class="text-gold">SITE</span></h1>
+      <span class="gold-line"></span>
+      <p class="text-muted-custom" style="max-width:520px;">
+        Conheça o projeto, quem o criou e como ele foi construído para celebrar
+        os melhores jogadores da Copa do Mundo 2026.
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== SOBRE O PROJETO ===== -->
+  <section class="info-section">
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <div class="section-label">O Projeto</div>
+        <h2 class="section-title">O QUE É O <span class="text-gold">TOP PLAYERS</span></h2>
+        <span class="gold-line mx-auto"></span>
+        <p class="text-muted-custom mx-auto" style="max-width:580px;">
+          Um projeto acadêmico desenvolvido para reunir, em um só lugar,
+          os perfis dos maiores astros que promovem estar em destaque na Copa do Mundo 2026.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3 reveal reveal-delay-1">
+          <div class="info-card">
+            <div class="info-icon"><i class="bi bi-display"></i></div>
+            <h3>{{ sobre.paginas }} Páginas</h3>
+            <p class="text-muted-custom" style="font-size:.9rem;">{{ sobre.descricao_paginas }}</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal reveal-delay-2">
+          <div class="info-card">
+            <div class="info-icon"><i class="bi bi-people-fill"></i></div>
+            <h3>{{ sobre.total_jogadores }} Jogadores</h3>
+            <p class="text-muted-custom" style="font-size:.9rem;">{{ sobre.descricao_jogadores }}</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal reveal-delay-3">
+          <div class="info-card">
+            <div class="info-icon"><i class="bi bi-calendar-event"></i></div>
+            <h3>{{ sobre.ano }}</h3>
+            <p class="text-muted-custom" style="font-size:.9rem;">{{ sobre.descricao_ano }}</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="info-card">
+            <div class="info-icon"><i class="bi bi-mortarboard-fill"></i></div>
+            <h3>{{ sobre.disciplina }}</h3>
+            <p class="text-muted-custom" style="font-size:.9rem;">{{ sobre.descricao_disciplina }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AUTORES ===== -->
+  <section class="authors-section">
+    <div class="container">
+      <div class="row align-items-center mb-5 reveal">
+        <div class="col-lg-6">
+          <div class="section-label">Equipe</div>
+          <h2 class="section-title">QUEM <span class="text-gold">CRIOU</span></h2>
+          <span class="gold-line"></span>
+          <p class="text-muted-custom">
+            {{ sobre.descricao_autores }}
+          </p>
+        </div>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        {% for autor in autores %}
+        <div class="col-sm-6 col-lg-4 reveal">
+          <div class="author-card">
+            <div class="author-avatar-area">
+              <div class="author-avatar">{{ autor.iniciais }}</div>
+              <div class="author-role-badge">{{ autor.papel }}</div>
             </div>
-        </section>
+            <div class="author-body">
+              <div class="author-name">{{ autor.nome }}</div>
+              <p class="author-info">{{ autor.descricao }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ELENCO DO SITE ===== -->
+  <section class="players-section">
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <div class="section-label">Elenco</div>
+        <h2 class="section-title">OS JOGADORES <span class="text-gold">DO SITE</span></h2>
+        <span class="gold-line mx-auto"></span>
+        <p class="text-muted-custom mx-auto" style="max-width:520px;">
+          Confira os {{ equipe|length }} nomes que compõem o elenco selecionado para este projeto.
+        </p>
+      </div>
+
+      <div class="row g-3">
+        {% for jogador in equipe %}
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="player-row">
+            <div class="player-row-num">{{ forloop.counter }}</div>
+            <div class="player-row-avatar">
+              <img src="{% static jogador.foto %}" alt="{{ jogador.nome }}"
+                   onerror="this.style.display='none';this.parentElement.style.background='var(--dark3)';">
+            </div>
+            <div>
+              <div class="player-row-name">{{ jogador.nome }}</div>
+              <div class="player-row-pos">{{ jogador.posição }}</div>
+            </div>
+            <div class="player-row-badge">{{ jogador.nacionalidade }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="text-center mt-5 reveal">
+        <a href="{% url 'elenco' %}" class="btn btn-gold btn-lg">
+          <i class="bi bi-person-lines-fill me-2"></i>Ver perfil completo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TECNOLOGIAS ===== -->
+  <section class="tech-section">
+    <div class="container">
+      <div class="row align-items-center gy-5">
+        <div class="col-lg-5 reveal">
+          <div class="section-label">Tecnologias</div>
+          <h2 class="section-title">FEITO COM <span class="text-gold">DEDICAÇÃO</span></h2>
+          <span class="gold-line"></span>
+          <p class="text-muted-custom">
+            O site foi construído com ferramentas modernas de desenvolvimento web,
+            combinando um back-end robusto em Django com um front-end responsivo e
+            estilizado em Bootstrap.
+          </p>
+          <p class="text-muted-custom mt-3">
+            Criado em <strong style="color:var(--gold);">{{ sobre.ano }}</strong> como
+            projeto da disciplina de <strong style="color:var(--gold);">{{ sobre.disciplina }}</strong>.
+          </p>
+        </div>
+        <div class="col-lg-6 offset-lg-1 reveal reveal-delay-1">
+          <div class="d-flex flex-wrap">
+            {% for tech in tecnologias %}
+            <span class="tech-pill">
+              <i class="{{ tech.icone }}"></i> {{ tech.nome }}
+            </span>
+            {% endfor %}
+          </div>
+          <div class="mt-4 p-3" style="background:var(--dark3);border:1px solid rgba(201,168,76,.1);border-radius:6px;font-family:monospace;font-size:.85rem;color:var(--muted);">
+            <span style="color:var(--gold);">$</span> python manage.py runserver<br>
+            <span style="color:rgba(201,168,76,.5);">→ Watching for file changes with StatReloader</span><br>
+            <span style="color:rgba(201,168,76,.5);">→ Starting development server at http://127.0.0.1:8000/</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COPYRIGHT ===== -->
+  <section style="padding:3rem 0;background:var(--dark2);border-top:1px solid rgba(201,168,76,.1);">
+    <div class="container text-center reveal">
+      <p class="text-muted-custom" style="font-size:.9rem;">
+        &copy; {{ sobre.ano }} <span style="color:var(--gold);">Top Players</span> —
+        Desenvolvido por
+        {% for autor in autores %}
+          <strong>{{ autor.nome }}</strong>{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+        · Projeto Acadêmico · Todos os direitos reservados.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+
 {% endblock %}
