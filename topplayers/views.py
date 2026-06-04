@@ -83,13 +83,6 @@ def equipe(request):
          "posição": "Ponta Direita",
          "nacionalidade": "Espanhol",
         },
-
-        {"foto": "topplayers/assets/img/equipe/ancelotti.png",
-         "nome": "Ancelotti",
-         "idade": 66,
-         "posição": "Técnico",
-         "nacionalidade": "Italiano",
-        },
     ]
 
     return render(request, "topplayers/equipe.html")
@@ -98,24 +91,26 @@ def sobre(request):
     sobre = {
         "paginas": 3,
         "descricao_paginas": "O site conta com as páginas Início, Elenco e Sobre, cada uma com conteúdo próprio e um menu global presente em todas.",
-        "total_jogadores": 12,
-        "descricao_jogadores": "Onze atletas de elite — incluindo o técnico — foram selecionados para representar o melhor do futebol mundial na Copa 2026.",
-        "ano": "2025",
-        "descricao_ano": "Projeto desenvolvido em 2025 como atividade da disciplina de Desenvolvimento Web.",
-        "disciplina": "Desenvolvimento Web",
+        "total_jogadores": 11,
+        "descricao_jogadores": "Onze atletas de elite foram selecionados para representar o melhor do futebol mundial na Copa 2026.",
+        "ano": "2026",
+        "descricao_ano": "Projeto desenvolvido em 2026 como avaliação da disciplina de Programação de Aplicação Web.",
+        "disciplina": "Programação de Aplicação Web",
         "descricao_disciplina": "Trabalho prático da disciplina, aplicando Django, templates, views e contexto dinâmico com dicionários Python.",
-        "descricao_autores": "O projeto foi desenvolvido por estudantes apaixonados por futebol e tecnologia, como parte das atividades avaliativas da disciplina.",
+        "descricao_autores": "O projeto foi desenvolvido por estudantes apaixonados por futebol :)",
     }
 
     autores = [
         {
             "nome": "José Cassiano",
+            "foto": "topplayers/assets/img/team/Cassianus.jpg",
             "papel": "Desenvolvedor",
             "descricao": "Responsável pela estrutura do projeto Django, configuração das views, URLs e templates base.",
         },
         
         {
             "nome": "Gustavo Ivo",
+            "foto": "topplayers/assets/img/team/gustauvo.jpeg",
             "papel": "Designer",
             "descricao": "Responsável pelo design visual do site, estilização CSS, responsividade e identidade das páginas.",
         },
@@ -128,11 +123,3 @@ def sobre(request):
     }
 
     return render(request, "topplayers/sobre.html", context)
-
-def info (request):
-    info = {
-    "nome": "Top Players",
-    "descricao": "Veja os melhores jogadores da Copa do Mundo deste ano aqui!",
-    "autores": ["Gustavo Ivo", "José Cassiano"],
-}
-    return render(request)

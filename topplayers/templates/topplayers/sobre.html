@@ -42,7 +42,7 @@
         <div class="col-md-6 col-lg-3 reveal reveal-delay-2">
           <div class="info-card">
             <div class="info-icon"><i class="bi bi-people-fill"></i></div>
-            <h3>{{ sobre.total_jogadores }} Jogadores</h3>
+            <h3>11 Jogadores</h3>
             <p class="text-muted-custom">{{ sobre.descricao_jogadores }}</p>
           </div>
         </div>
@@ -81,7 +81,7 @@
         <div class="col-sm-6 col-lg-4 reveal">
           <div class="author-card">
             <div class="author-avatar-area">
-              <div class="author-avatar">{{ autor.foto }}</div>
+              <img class="author-avatar" src="{% static autor.foto %}" alt="..."/>
               <div class="author-role-badge">{{ autor.papel }}</div>
             </div>
             <div class="author-body">
@@ -103,7 +103,7 @@
         <h2 class="section-title">OS JOGADORES <span class="text-gold">DO SITE</span></h2>
         <span class="gold-line mx-auto"></span>
         <p class="text-muted-custom mx-auto" style="max-width:520px;">
-          Confira os 11 nomes que compõem o elenco selecionado para este projeto.
+          Confira os {{ sobre.ano }} nomes que compõem o elenco selecionado para este projeto.
         </p>
       </div>
 
