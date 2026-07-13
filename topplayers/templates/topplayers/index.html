@@ -8,17 +8,17 @@
   <!-- ── HERO ────────────────────────────────────────────────── -->
   <section class="hero">
     <div class="hero-grid-lines"></div>
-    <div class="hero-number">2026</div>
+    <div class="hero-number">{{ informacao.ano }}</div>
     <div class="container position-relative">
       <div class="row align-items-center">
         <div class="col-lg-7">
-          <div class="hero-eyebrow">FIFA WORLD CUP · EUA · MÉXICO · CANADÁ</div>
+          <div class="hero-eyebrow">FIFA WORLD CUP · {{ informacao.pais_sede }}</div>
           <h1 class="hero-title">
             AS ESTRELAS
             <span class="highlight">DO MUNDO</span>
           </h1>
           <p class="hero-subtitle">
-            48 seleções. 104 jogos. E os melhores jogadores do planeta prontos para
+            {{ informacao.quant_selecoes }} seleções, 104 jogos e os melhores jogadores do planeta prontos para
             escrever a história do maior torneio do futebol mundial.
           </p>
           <div class="d-flex flex-wrap gap-3">
@@ -31,15 +31,15 @@
           </div>
           <div class="hero-stats">
             <div>
-              <div class="hero-stat-value">48</div>
+              <div class="hero-stat-value">{{ informacao.quant_selecoes }}</div>
               <div class="hero-stat-label">Seleções</div>
             </div>
             <div>
-              <div class="hero-stat-value">104</div>
+              <div class="hero-stat-value">{{ informacao.quant_jogos }}</div>
               <div class="hero-stat-label">Partidas</div>
             </div>
             <div>
-              <div class="hero-stat-value">3</div>
+              <div class="hero-stat-value">{{ informacao.quant_pais_sede }}</div>
               <div class="hero-stat-label">Países-sede</div>
             </div>
             <div>
@@ -56,7 +56,7 @@
             <div class="hero-trophy-content">
               <i class="bi bi-trophy-fill hero-trophy-icon"></i>
               <div class="hero-trophy-label">FIFA WORLD CUP</div>
-              <div class="hero-trophy-year">2026</div>
+              <div class="hero-trophy-year">{{ informacao.ano }}</div>
             </div>
           </div>
         </div>
@@ -69,40 +69,39 @@
     <div class="container">
       <div class="text-center mb-5 reveal">
         <div class="section-label">O Torneio</div>
-        <h2 class="section-title">COPA DO MUNDO <span class="text-gold">2026</span></h2>
+        <h2 class="section-title">COPA DO MUNDO <span class="text-gold">{{ informacao.ano }}</span></h2>
         <span class="gold-line mx-auto"></span>
         <p class="text-muted-custom mx-auto" style="max-width:560px;">
-          A edição mais esperada da história. Pela primeira vez com 48 seleções,
-          o torneio será sediado em três países do continente americano.
+          {{ informacao.descricao_da_copa_1 }}
         </p>
       </div>
       <div class="row g-4">
         <div class="col-md-6 col-lg-3 reveal reveal-delay-1">
           <div class="about-card">
             <div class="about-icon"><i class="bi bi-geo-alt-fill"></i></div>
-            <h3>3 Países-sede</h3>
-            <p class="text-muted-custom">Estados Unidos, México e Canadá recebem juntos o maior espetáculo do futebol mundial.</p>
+            <h3>{{ informacao.quant_pais_sede }} Países-sede</h3>
+            <p class="text-muted-custom">{{ informacao.pais_sede }} recebem juntos o maior espetáculo do futebol mundial.</p>
           </div>
         </div>
         <div class="col-md-6 col-lg-3 reveal reveal-delay-2">
           <div class="about-card">
             <div class="about-icon"><i class="bi bi-flag-fill"></i></div>
-            <h3>48 Seleções</h3>
-            <p class="text-muted-custom">Expansão histórica — 16 novas seleções terão a chance de disputar o mundial pela primeira vez.</p>
+            <h3>{{ informacao.quant_selecoes }} Seleções</h3>
+            <p class="text-muted-custom">{{ informacao.descricao_da_copa_2 }}</p>
           </div>
         </div>
         <div class="col-md-6 col-lg-3 reveal reveal-delay-3">
           <div class="about-card">
             <div class="about-icon"><i class="bi bi-lightning-fill"></i></div>
             <h3>Novos Talentos</h3>
-            <p class="text-muted-custom">Jovens prodígios como Lamine Yamal dividem o palco com veteranos consagrados como Mbappé.</p>
+            <p class="text-muted-custom">Jovens prodígios como {{ informacao.talento_s }} dividem o palco com veteranos consagrados como {{ informacao.veterano_s }}.</p>
           </div>
         </div>
         <div class="col-md-6 col-lg-3 reveal">
           <div class="about-card">
             <div class="about-icon"><i class="bi bi-shield-fill-check"></i></div>
             <h3>Alta Competição</h3>
-            <p class="text-muted-custom">Brasil, França, Espanha e Inglaterra entram como favoritos num campo que nunca foi tão equilibrado.</p>
+            <p class="text-muted-custom">{{ informacao.selecoes_favoritas }} entram como favoritos num campo que nunca foi tão equilibrado.</p>
           </div>
         </div>
       </div>
@@ -123,8 +122,7 @@
             que ficam para sempre na memória coletiva da humanidade.
           </p>
           <p class="text-muted-custom mt-3">
-            Em 2026, o torneio chega à sua 23ª edição com um formato renovado,
-            mais times, mais jogos e — como sempre — a promessa de emoções inesquecíveis.
+            Em {{ informacao.ano }}, o torneio chega à sua {{ informacao.edicao }}ª edição e, como sempre, nos traz uma promessa de emoções inesquecíveis.
           </p>
           <a href="{% url 'equipe' %}" class="btn btn-gold mt-4">
             <i class="bi bi-arrow-right me-2"></i>Conhecer os jogadores
@@ -150,7 +148,7 @@
             </div>
             <div class="timeline-item">
               <div class="timeline-year">2026 — EUA / MÉX / CAN</div>
-              <p class="timeline-text">A história continua. 48 seleções, 3 países-sede e novos heróis prontos para eternizar seus nomes.</p>
+              <p class="timeline-text">Entrando para a história das copas com um novo formato de torneio, agora sendo 48 seleções, 3 países-sede e novos jogadores prontos para eternizarem seus nomes.</p>
             </div>
           </div>
         </div>
@@ -166,58 +164,13 @@
         <h2 class="section-title">OS 11 JOGADORES <span class="text-gold">DESTE SITE</span></h2>
         <span class="gold-line mx-auto"></span>
       </div>
+      {% for jogador in jogadores %}
       <div class="d-flex flex-wrap justify-content-center reveal">
         <a href="{% url 'equipe' %}" class="player-pill text-decoration-none">
-          <div class="player-pill-avatar">LY</div>
-          <div><div class="player-pill-name">Lamine Yamal</div><div class="player-pill-country">🇪🇸 Espanha</div></div>
+          <div class="player-pill-avatar">{{ jogador.iniciais_nome }}</div>
+          <div><div class="player-pill-name">{{ jogador.nome }}</div><div class="player-pill-country">{{ jogador.iniciais_nac }} - {{ jogador.nacionalidade }}</div></div>
         </a>
-        <a href="{% url 'equipe' %}" class="player-pill text-decoration-none">
-          <div class="player-pill-avatar">KM</div>
-          <div><div class="player-pill-name">Kylian Mbappé</div><div class="player-pill-country">🇫🇷 França</div></div>
-        </a>
-        <a href="{% url 'equipe' %}" class="player-pill text-decoration-none">
-          <div class="player-pill-avatar">VJ</div>
-          <div><div class="player-pill-name">Vinícius Jr.</div><div class="player-pill-country">🇧🇷 Brasil</div></div>
-        </a>
-        <a href="{% url 'equipe' %}" class="player-pill text-decoration-none">
-          <div class="player-pill-avatar">VI</div>
-          <div><div class="player-pill-name">Vitinha</div><div class="player-pill-country">🇵🇹 Portugal</div></div>
-        </a>
-        <a href="{% url 'equipe' %}" class="player-pill text-decoration-none">
-          <div class="player-pill-avatar">DR</div>
-          <div><div class="player-pill-name">Declan Rice</div><div class="player-pill-country">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra</div></div>
-        </a>
-        <a href="{% url 'equipe' %}" class="player-pill text-decoration-none">
-          <div class="player-pill-avatar">PE</div>
-          <div><div class="player-pill-name">Pedri</div><div class="player-pill-country">🇪🇸 Espanha</div></div>
-        </a>
-        <a href="{% url 'equipe' %}" class="player-pill text-decoration-none">
-          <div class="player-pill-avatar">AH</div>
-          <div><div class="player-pill-name">Achraf Hakimi</div><div class="player-pill-country">🇲🇦 Marrocos</div></div>
-        </a>
-        <a href="{% url 'equipe' %}" class="player-pill text-decoration-none">
-          <div class="player-pill-avatar">GM</div>
-          <div><div class="player-pill-name">Gabriel Magalhães</div><div class="player-pill-country">🇧🇷 Brasil</div></div>
-        </a>
-        <a href="{% url 'equipe' %}" class="player-pill text-decoration-none">
-          <div class="player-pill-avatar">WS</div>
-          <div><div class="player-pill-name">William Saliba</div><div class="player-pill-country">🇫🇷 França</div></div>
-        </a>
-        <a href="{% url 'equipe' %}" class="player-pill text-decoration-none">
-          <div class="player-pill-avatar">NM</div>
-          <div><div class="player-pill-name">Nuno Mendes</div><div class="player-pill-country">🇵🇹 Portugal</div></div>
-        </a>
-        <a href="{% url 'equipe' %}" class="player-pill text-decoration-none">
-          <div class="player-pill-avatar">DR</div>
-          <div><div class="player-pill-name">David Raya</div><div class="player-pill-country">🇪🇸 Espanha</div></div>
-        </a>
-      </div>
-      <div class="text-center mt-5 reveal">
-        <a href="{% url 'equipe' %}" class="btn btn-gold btn-lg">
-          <i class="bi bi-people-fill me-2"></i>Ver perfil completo dos jogadores
-        </a>
-      </div>
-    </div>
+      {% endfor %}
   </section>
 
   <!-- ── CTA ──────────────────────────────────────────────────── -->
@@ -227,7 +180,7 @@
         <div class="section-label mb-2">Está pronto?</div>
         <h2 class="section-title">O MUNDO PARA.<br><span class="text-gold">A COPA COMEÇA.</span></h2>
         <p class="text-muted-custom mt-3 mb-4">
-          Explore os perfis dos 11 maiores astros que prometem brilhar na Copa do Mundo 2026.
+          Explore os perfis dos 11 maiores astros que prometem brilhar na Copa do Mundo {{ informacao.ano }}.
         </p>
         <a href="{% url 'equipe' %}" class="btn btn-gold btn-lg me-3">
           <i class="bi bi-people-fill me-2"></i>Ver Equipe Completa

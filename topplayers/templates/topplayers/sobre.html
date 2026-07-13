@@ -5,147 +5,164 @@
 
 {% block content %}
 
-  <!-- PAGE HEADER -->
-  <div class="page-header page-header--sobre">
-    <div class="container">
-      <div class="section-label">Top Players · 2026</div>
-      <h1 class="section-title">SOBRE O <span class="text-gold">SITE</span></h1>
-      <span class="gold-line"></span>
-      <p class="text-muted-custom" style="max-width:520px;">
-        Conheça o projeto, quem o criou e como ele foi construído para celebrar
-        os melhores jogadores da Copa do Mundo 2026.
+<!-- PAGE HEADER -->
+<div class="page-header page-header--sobre">
+  <div class="container">
+    <div class="section-label">Top Players · {{ informacao.ano }}</div>
+
+    <h1 class="section-title">
+      SOBRE O <span class="text-gold">SITE</span>
+    </h1>
+
+    <span class="gold-line"></span>
+
+    <p class="text-muted-custom" style="max-width:520px;">
+      Conheça o projeto, quem o criou e como ele foi construído para celebrar
+      os melhores jogadores da Copa do Mundo {{ informacao.ano }}.
+    </p>
+  </div>
+</div>
+
+<!-- SOBRE O PROJETO -->
+<section class="info-section">
+  <div class="container">
+
+    <div class="text-center mb-5 reveal">
+      <div class="section-label">O Projeto</div>
+
+      <h2 class="section-title">
+        O QUE É O <span class="text-gold">TOP PLAYERS</span>
+      </h2>
+
+      <span class="gold-line mx-auto"></span>
+
+      <p class="text-muted-custom mx-auto" style="max-width:580px;">
+        Um projeto acadêmico desenvolvido para reunir, em um só lugar,
+        os perfis dos maiores astros que prometem estar em destaque na Copa do Mundo {{ informacao.ano }}
       </p>
+    </div>
+
+    <div class="row g-4">
+
+      <div class="col-md-6 col-lg-3 reveal reveal-delay-1">
+        <div class="info-card">
+          <div class="info-icon"><i class="bi bi-display"></i></div>
+          <h3>3 Páginas</h3>
+          <p class="text-muted-custom">
+            O site conta com as páginas Início, Elenco e Sobre, cada uma com conteúdo próprio e um menu global presente em todas
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3 reveal reveal-delay-2">
+        <div class="info-card">
+          <div class="info-icon"><i class="bi bi-people-fill"></i></div>
+          <h3>11 Jogadores</h3>
+          <p class="text-muted-custom">
+            Onze atletas de elite foram selecionados para representar o melhor do futebol mundial na Copa {{ informacao.ano }}
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3 reveal reveal-delay-3">
+        <div class="info-card">
+          <div class="info-icon"><i class="bi bi-calendar-event"></i></div>
+          <h3>2026</h3>
+          <p class="text-muted-custom">
+            Projeto desenvolvido em {{ informacao.ano }} como avaliação da disciplina de Programação de Aplicação Web
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="info-card">
+          <div class="info-icon"><i class="bi bi-mortarboard-fill"></i></div>
+          <h3>Programação de Aplicação Web</h3>
+          <p class="text-muted-custom">
+            Trabalho prático da disciplina, aplicando Django, templates, views e models
+          </p>
+        </div>
+      </div>
+
     </div>
   </div>
+</section>
 
-  <!-- ── SOBRE O PROJETO ──────────────────────────────────────── -->
-  <section class="info-section">
-    <div class="container">
-      <div class="text-center mb-5 reveal">
-        <div class="section-label">O Projeto</div>
-        <h2 class="section-title">O QUE É O <span class="text-gold">TOP PLAYERS</span></h2>
-        <span class="gold-line mx-auto"></span>
-        <p class="text-muted-custom mx-auto" style="max-width:580px;">
-          Um projeto acadêmico desenvolvido para reunir, em um só lugar,
-          os perfis dos maiores astros que promovem estar em destaque na Copa do Mundo 2026.
+<!-- AUTORES -->
+<section class="authors-section">
+  <div class="container">
+
+    <div class="row align-items-center mb-5 reveal">
+      <div class="col-lg-6">
+        <div class="section-label">Equipe</div>
+
+        <h2 class="section-title">
+          QUEM <span class="text-gold">CRIOU</span>
+        </h2>
+
+        <span class="gold-line"></span>
+
+        <p class="text-muted-custom">
+          O projeto foi desenvolvido por estudantes apaixonados por futebol :D
         </p>
       </div>
-
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-3 reveal reveal-delay-1">
-          <div class="info-card">
-            <div class="info-icon"><i class="bi bi-display"></i></div>
-            <h3>{{ sobre.paginas }} Páginas</h3>
-            <p class="text-muted-custom">{{ sobre.descricao_paginas }}</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 reveal reveal-delay-2">
-          <div class="info-card">
-            <div class="info-icon"><i class="bi bi-people-fill"></i></div>
-            <h3>11 Jogadores</h3>
-            <p class="text-muted-custom">{{ sobre.descricao_jogadores }}</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 reveal reveal-delay-3">
-          <div class="info-card">
-            <div class="info-icon"><i class="bi bi-calendar-event"></i></div>
-            <h3>{{ sobre.ano }}</h3>
-            <p class="text-muted-custom">{{ sobre.descricao_ano }}</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 reveal">
-          <div class="info-card">
-            <div class="info-icon"><i class="bi bi-mortarboard-fill"></i></div>
-            <h3>{{ sobre.disciplina }}</h3>
-            <p class="text-muted-custom">{{ sobre.descricao_disciplina }}</p>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
 
-  <!-- ── AUTORES ──────────────────────────────────────────────── -->
-  <section class="authors-section">
-    <div class="container">
-      <div class="row align-items-center mb-5 reveal">
-        <div class="col-lg-6">
-          <div class="section-label">Equipe</div>
-          <h2 class="section-title">QUEM <span class="text-gold">CRIOU</span></h2>
-          <span class="gold-line"></span>
-          <p class="text-muted-custom">{{ sobre.descricao_autores }}</p>
-        </div>
-      </div>
+    <div class="row g-4 justify-content-center">
 
-      <div class="row g-4 justify-content-center">
-        {% for autor in autores %}
-        <div class="col-sm-6 col-lg-4 reveal">
-          <div class="author-card">
-            <div class="author-avatar-area">
-              <img class="author-avatar" src="{% static autor.foto %}" alt="..."/>
-              <div class="author-role-badge">{{ autor.papel }}</div>
-            </div>
-            <div class="author-body">
-              <div class="author-name">{{ autor.nome }}</div>
-              <p class="author-info">{{ autor.descricao }}</p>
+      {% for autor in autores %}
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="author-card">
+
+          <div class="author-avatar-area">
+            <img class="author-avatar"
+                 src="{% static autor.foto %}"
+                 alt="{{ autor.nome }}">
+
+            <div class="author-role-badge">
+              {{ autor.papel }}
             </div>
           </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
 
-  <!-- ── ELENCO DO SITE ───────────────────────────────────────── -->
-  <section class="players-section">
-    <div class="container">
-      <div class="text-center mb-5 reveal">
-        <div class="section-label">Elenco</div>
-        <h2 class="section-title">OS JOGADORES <span class="text-gold">DO SITE</span></h2>
-        <span class="gold-line mx-auto"></span>
-        <p class="text-muted-custom mx-auto" style="max-width:520px;">
-          Confira os {{ sobre.ano }} nomes que compõem o elenco selecionado para este projeto.
-        </p>
-      </div>
-
-      <div class="row g-3">
-        {% for jogador in equipe %}
-        <div class="col-md-6 col-lg-4 reveal">
-          <div class="player-row">
-            <div class="player-row-num">{{ forloop.counter }}</div>
-            <div class="player-row-avatar">
-              <img src="{% static jogador.foto %}" alt="{{ jogador.nome }}"
-                   onerror="this.style.display='none';this.parentElement.style.background='var(--dark3)';">
-            </div>
-            <div>
-              <div class="player-row-name">{{ jogador.nome }}</div>
-              <div class="player-row-pos">{{ jogador.posição }}</div>
-            </div>
-            <div class="player-row-badge">{{ jogador.nacionalidade }}</div>
+          <div class="author-body">
+            <div class="author-name">{{ autor.nome }}</div>
+            <p class="author-info">{{ autor.descricao }}</p>
           </div>
+
         </div>
-        {% endfor %}
       </div>
+      {% endfor %}
 
-      <div class="text-center mt-5 reveal">
-        <a href="{% url 'equipe' %}" class="btn btn-gold btn-lg">
-          <i class="bi bi-person-lines-fill me-2"></i>Ver perfil completo
-        </a>
-      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ── COPYRIGHT ───────────────────────────────────────────── -->
-  <section class="copyright-strip">
-    <div class="container text-center reveal">
-      <p class="text-muted-custom">
-        &copy; 2026 <span class="text-gold">Top Players</span> —
-        Desenvolvido por
-        {% for autor in autores %}
-          <strong>{{ autor.nome }}</strong>{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-        · Projeto Acadêmico · Todos os direitos reservados.
+<!-- ELENCO -->
+<section class="players-section">
+  <div class="container">
+
+    <div class="text-center mb-5 reveal">
+      <div class="section-label">Elenco</div>
+
+      <h2 class="section-title">
+        OS JOGADORES <span class="text-gold">DO SITE</span>
+      </h2>
+
+      <span class="gold-line mx-auto"></span>
+
+      <p class="text-muted-custom mx-auto" style="max-width:520px;">
+        Confira os 11 nomes que compõem o elenco selecionado para este projeto.
       </p>
     </div>
-  </section>
+
+    <div class="text-center mt-5 reveal">
+      <a href="{% url 'equipe' %}" class="btn btn-gold btn-lg">
+        <i class="bi bi-person-lines-fill me-2"></i>
+        Ver perfil completo
+      </a>
+    </div>
+
+  </div>
+</section>
 
 {% endblock %}

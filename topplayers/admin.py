@@ -1,3 +1,5 @@
 from django.contrib import admin
+from . models import Jogador, Informacao
 
-# Register your models here.
+admin.site.register(Jogador)
+admin.site.register(Informacao)

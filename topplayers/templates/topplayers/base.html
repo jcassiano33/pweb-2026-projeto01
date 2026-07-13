@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block titulo %}Top Players{% endblock %} — Copa do Mundo 2026</title>
+  <title>{% block titulo %}Top Players{% endblock %} — Copa do Mundo {{ informacao.ano }}</title>
 
   {% if info %}
   <meta name="description" content="{{ info.descricao }}" />
@@ -29,7 +29,7 @@
   <nav class="navbar navbar-expand-lg site-nav">
     <div class="container">
       <a class="navbar-brand" href="{% url 'index' %}">
-        <i class="bi bi-trophy-fill me-2"></i>COPA 2026
+        <i class="bi bi-trophy-fill me-2"></i>COPA {{ informacao.ano }}
       </a>
       <button class="navbar-toggler" type="button"
               data-bs-toggle="collapse" data-bs-target="#mainNav"
@@ -68,49 +68,15 @@
 
   <!-- ── FOOTER ──────────────────────────────────────────────── -->
   <footer class="site-footer">
-    <div class="container">
-      <div class="row gy-4">
-        <div class="col-lg-4">
-          <div class="footer-logo"><i class="bi bi-trophy-fill me-2"></i>COPA 2026</div>
-          <p class="footer-tagline">As estrelas que iluminam o maior torneio do mundo.</p>
-          <div class="d-flex gap-2 mt-3">
-            <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="social-btn"><i class="bi bi-twitter-x"></i></a>
-            <a href="#" class="social-btn"><i class="bi bi-youtube"></i></a>
-          </div>
-        </div>
-        <div class="col-sm-6 col-lg-2 offset-lg-1">
-          <div class="footer-heading">Páginas</div>
-          <ul class="footer-links">
-            <li><a href="{% url 'index' %}"><i class="bi bi-chevron-right me-1"></i>Início</a></li>
-            <li><a href="{% url 'equipe' %}"><i class="bi bi-chevron-right me-1"></i>Equipe</a></li>
-            <li><a href="{% url 'sobre' %}"><i class="bi bi-chevron-right me-1"></i>Sobre</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-          <div class="footer-heading">Destaques</div>
-          <ul class="footer-links">
-            <li><a href="{% url 'equipe' %}">Lamine Yamal</a></li>
-            <li><a href="{% url 'equipe' %}">Kylian Mbappé</a></li>
-            <li><a href="{% url 'equipe' %}">Vinícius Jr.</a></li>
-            <li><a href="{% url 'equipe' %}">Pedri</a></li>
-            <li><a href="{% url 'equipe' %}">Declan Rice</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-2">
-          <div class="footer-heading">Torneio</div>
-          <ul class="footer-links">
-            <li><a href="#">Copa 2026</a></li>
-            <li><a href="#">EUA · México · Canadá</a></li>
-            <li><a href="#">48 seleções</a></li>
-          </ul>
-        </div>
-      </div>
-      <hr class="footer-divider" />
-      <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
-        <p class="footer-copy mb-0">&copy; 2026 Copa do Mundo — Todos os direitos reservados.</p>
-        <p class="footer-copy mb-0">Projeto • Disciplina de Programação de Aplicação Web</p>
-      </div>
+    <div class="container text-center reveal">
+      <p class="text-muted-custom">
+        &copy; {{ informacao.ano }} <span class="text-gold">Top Players</span> —
+        Desenvolvido por
+        {% for autor in autores %}
+          <strong>{{ autor.nome }}</strong>{% if not forloop.last %} e {% endif %}
+        {% endfor %}
+        · Projeto Acadêmico · Todos os direitos reservados.
+      </p>
     </div>
   </footer>
 

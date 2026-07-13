@@ -8,7 +8,7 @@
   <!-- PAGE HEADER -->
   <div class="page-header page-header--equipe">
     <div class="container">
-      <div class="section-label">Copa do Mundo 2026</div>
+      <div class="section-label">Copa do Mundo {{ informacao.ano }}</div>
       <h1 class="section-title">EQUIPE DE <span class="text-gold">ESTRELAS</span></h1>
       <span class="gold-line"></span>
       <p class="text-muted-custom" style="max-width:520px;">
@@ -19,319 +19,38 @@
   </div>
 
   <!-- PLAYERS GRID -->
+
   <section class="py-5">
+    {% for jogador in jogadores %}
     <div class="container">
       <div class="row g-4" id="playersGrid">
-        <!-- 1. LAMINE YAMAL -->
-        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="atacante">
+        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="posicao">
           <div class="player-card">
             <div class="card-avatar-area">
-              <div class="card-number">11</div>
-              <div class="card-avatar">LM</div>
-              <div class="card-position-badge">Atacante</div>
-              <div class="card-flag">🇪🇸</div>
-            </div>
-            
-            <div class="card-body-custom">
-              <div class="card-name">Lamine Yamal</div>
-              <div class="card-country">Espanha · FC Barcelona</div>
-              <div class="card-stats">
-                <div class="card-stat"><div class="card-stat-value">17</div><div class="card-stat-label">Idade</div></div>
-                <div class="card-stat"><div class="card-stat-value">Mataró, ESP</div><div class="card-stat-label">Nascimento</div></div>
-                <div class="card-stat"><div class="card-stat-value">Ponta Dir.</div><div class="card-stat-label">Posição</div></div>
-                <div class="card-stat"><div class="card-stat-value">1.79m</div><div class="card-stat-label">Altura</div></div>
+              <div class="card-number">{{ jogador.numero }}</div>
+              <div class="card-avatar">
+                <img src="{{ jogador.foto.url }}" alt="jogador">
               </div>
-              <p class="card-bio">
-                O maior prodígio do futebol mundial. Aos 16 anos foi campeão europeu com a Espanha e eleito o melhor jovem da Euro 2024. Velocidade, dribles e visão de jogo fora do comum.
-              </p>
+              <div class="card-position-badge">{{ jogador.posicao }}</div>
+              <div class="card-flag">{{ jogador.iniciais_nac }}</div>
+            </div>
+            <div class="card-body-custom">
+              <div class="card-name">{{ jogador.nome }}</div>
+              <div class="card-country">{{ jogador.nacionalidade }}</div>
+              <div class="card-stats">
+                <div class="card-stat"><div class="card-stat-value">{{ jogador.idade }}</div><div class="card-stat-label">Idade</div></div>
+                <div class="card-stat"><div class="card-stat-value">{{ jogador.local_nasc }}</div><div class="card-stat-label">Nascimento</div></div>
+                <div class="card-stat"><div class="card-stat-value">{{ jogador.posicao }}</div><div class="card-stat-label">Posição</div></div>
+                <div class="card-stat"><div class="card-stat-value">{{ jogador.altura }}</div><div class="card-stat-label">Altura</div></div>
+              </div>
+              <p class="card-bio">{{ jogador.bio }}</p>
               <div class="card-club-badge">
-                <i class="bi bi-shield-fill"></i> FC Barcelona — La Liga
+                <i class="bi bi-shield-fill"></i> {{ jogador.time }}
               </div>
             </div>
           </div>
         </div>
-
-        <!-- 2. KYLIAN MBAPPÉ -->
-        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="atacante">
-          <div class="player-card">
-            <div class="card-avatar-area">
-              <div class="card-number">10</div>
-              <div class="card-avatar">KM</div>
-              <div class="card-position-badge">Atacante</div>
-              <div class="card-flag">🇫🇷</div>
-            </div>
-            <div class="card-body-custom">
-              <div class="card-name">Kylian Mbappé</div>
-              <div class="card-country">França · Real Madrid</div>
-              <div class="card-stats">
-                <div class="card-stat"><div class="card-stat-value">26</div><div class="card-stat-label">Idade</div></div>
-                <div class="card-stat"><div class="card-stat-value">Paris, FRA</div><div class="card-stat-label">Nascimento</div></div>
-                <div class="card-stat"><div class="card-stat-value">Centroavante</div><div class="card-stat-label">Posição</div></div>
-                <div class="card-stat"><div class="card-stat-value">1.78m</div><div class="card-stat-label">Altura</div></div>
-              </div>
-              <p class="card-bio">
-                Um dos jogadores mais rápidos da história do futebol. Campeão mundial em 2018, artilheiro da Copa de 2022. No Real Madrid, busca completar o hall dos maiores de todos os tempos.
-              </p>
-              <div class="card-club-badge">
-                <i class="bi bi-shield-fill"></i> Real Madrid — La Liga
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3. VINÍCIUS JR. -->
-        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="atacante">
-          <div class="player-card">
-            <div class="card-avatar-area">
-              <div class="card-number">7</div>
-              <div class="card-avatar">VJ</div>
-              <div class="card-position-badge">Atacante</div>
-              <div class="card-flag">🇧🇷</div>
-            </div>
-            <div class="card-body-custom">
-              <div class="card-name">Vinícius Jr.</div>
-              <div class="card-country">Brasil · Real Madrid</div>
-              <div class="card-stats">
-                <div class="card-stat"><div class="card-stat-value">24</div><div class="card-stat-label">Idade</div></div>
-                <div class="card-stat"><div class="card-stat-value">São Gonçalo, BRA</div><div class="card-stat-label">Nascimento</div></div>
-                <div class="card-stat"><div class="card-stat-value">Ponta Esq.</div><div class="card-stat-label">Posição</div></div>
-                <div class="card-stat"><div class="card-stat-value">1.76m</div><div class="card-stat-label">Altura</div></div>
-              </div>
-              <p class="card-bio">
-                A maior esperança brasileira para o hexacampeonato. Venceu duas Champions League pelo Real Madrid. Velocidade devastadora e dribles inigualáveis fazem dele o craque da América do Sul.
-              </p>
-              <div class="card-club-badge">
-                <i class="bi bi-shield-fill"></i> Real Madrid — La Liga
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 4. VITINHA -->
-        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="meia">
-          <div class="player-card">
-            <div class="card-avatar-area">
-              <div class="card-number">8</div>
-              <div class="card-avatar">VI</div>
-              <div class="card-position-badge">Meia</div>
-              <div class="card-flag">🇵🇹</div>
-            </div>
-            <div class="card-body-custom">
-              <div class="card-name">Vitinha</div>
-              <div class="card-country">Portugal · Paris Saint-Germain</div>
-              <div class="card-stats">
-                <div class="card-stat"><div class="card-stat-value">24</div><div class="card-stat-label">Idade</div></div>
-                <div class="card-stat"><div class="card-stat-value">Braga, POR</div><div class="card-stat-label">Nascimento</div></div>
-                <div class="card-stat"><div class="card-stat-value">Meia-Centro</div><div class="card-stat-label">Posição</div></div>
-                <div class="card-stat"><div class="card-stat-value">1.72m</div><div class="card-stat-label">Altura</div></div>
-              </div>
-              <p class="card-bio">
-                Motor do PSG e peça fundamental de Portugal. Com toque apurado e visão de jogo, Vitinha é o maestro que organiza e distribui o jogo com elegância e precisão cirúrgica.
-              </p>
-              <div class="card-club-badge">
-                <i class="bi bi-shield-fill"></i> Paris Saint-Germain — Ligue 1
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 5. DECLAN RICE -->
-        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="volante">
-          <div class="player-card">
-            <div class="card-avatar-area">
-              <div class="card-number">4</div>
-              <div class="card-avatar">DR</div>
-              <div class="card-position-badge">Volante</div>
-              <div class="card-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div>
-            </div>
-            <div class="card-body-custom">
-              <div class="card-name">Declan Rice</div>
-              <div class="card-country">Inglaterra · Arsenal FC</div>
-              <div class="card-stats">
-                <div class="card-stat"><div class="card-stat-value">26</div><div class="card-stat-label">Idade</div></div>
-                <div class="card-stat"><div class="card-stat-value">Kingston, ENG</div><div class="card-stat-label">Nascimento</div></div>
-                <div class="card-stat"><div class="card-stat-value">Volante</div><div class="card-stat-label">Posição</div></div>
-                <div class="card-stat"><div class="card-stat-value">1.85m</div><div class="card-stat-label">Altura</div></div>
-              </div>
-              <p class="card-bio">
-                Capitão do Arsenal e pilar da seleção inglesa. Considerado o melhor volante da Premier League, Rice une poder físico, leitura de jogo e capacidade de distribuição fora do comum.
-              </p>
-              <div class="card-club-badge">
-                <i class="bi bi-shield-fill"></i> Arsenal FC — Premier League
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 6. PEDRI -->
-        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="meia">
-          <div class="player-card">
-            <div class="card-avatar-area">
-              <div class="card-number">8</div>
-              <div class="card-avatar">PE</div>
-              <div class="card-position-badge">Meia</div>
-              <div class="card-flag">🇪🇸</div>
-            </div>
-            <div class="card-body-custom">
-              <div class="card-name">Pedri</div>
-              <div class="card-country">Espanha · FC Barcelona</div>
-              <div class="card-stats">
-                <div class="card-stat"><div class="card-stat-value">22</div><div class="card-stat-label">Idade</div></div>
-                <div class="card-stat"><div class="card-stat-value">Tegueste, ESP</div><div class="card-stat-label">Nascimento</div></div>
-                <div class="card-stat"><div class="card-stat-value">Meia-Centro</div><div class="card-stat-label">Posição</div></div>
-                <div class="card-stat"><div class="card-stat-value">1.74m</div><div class="card-stat-label">Altura</div></div>
-              </div>
-              <p class="card-bio">
-                Herdeiro de Iniesta no Barcelona e na seleção espanhola. Com apenas 22 anos, Pedri já é bicampeão europeu e referência técnica do futebol mundial pelo seu estilo refinado e inteligente.
-              </p>
-              <div class="card-club-badge">
-                <i class="bi bi-shield-fill"></i> FC Barcelona — La Liga
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 7. ACHRAF HAKIMI -->
-        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="lateral">
-          <div class="player-card">
-            <div class="card-avatar-area">
-              <div class="card-number">2</div>
-              <div class="card-avatar">AH</div>
-              <div class="card-position-badge">Lateral</div>
-              <div class="card-flag">🇲🇦</div>
-            </div>
-            <div class="card-body-custom">
-              <div class="card-name">Achraf Hakimi</div>
-              <div class="card-country">Marrocos · Paris Saint-Germain</div>
-              <div class="card-stats">
-                <div class="card-stat"><div class="card-stat-value">26</div><div class="card-stat-label">Idade</div></div>
-                <div class="card-stat"><div class="card-stat-value">Madri, ESP</div><div class="card-stat-label">Nascimento</div></div>
-                <div class="card-stat"><div class="card-stat-value">Lateral Dir.</div><div class="card-stat-label">Posição</div></div>
-                <div class="card-stat"><div class="card-stat-value">1.81m</div><div class="card-stat-label">Altura</div></div>
-              </div>
-              <p class="card-bio">
-                O melhor lateral da atualidade. Hakimi liderou Marrocos até as semifinais em 2022, feito histórico para a África. No PSG, é devastador pelos flancos com velocidade e qualidade técnica.
-              </p>
-              <div class="card-club-badge">
-                <i class="bi bi-shield-fill"></i> Paris Saint-Germain — Ligue 1
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 8. GABRIEL MAGALHÃES -->
-        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="zagueiro">
-          <div class="player-card">
-            <div class="card-avatar-area">
-              <div class="card-number">6</div>
-              <div class="card-avatar">GM</div>
-              <div class="card-position-badge">Zagueiro</div>
-              <div class="card-flag">🇧🇷</div>
-            </div>
-            <div class="card-body-custom">
-              <div class="card-name">Gabriel Magalhães</div>
-              <div class="card-country">Brasil · Arsenal FC</div>
-              <div class="card-stats">
-                <div class="card-stat"><div class="card-stat-value">27</div><div class="card-stat-label">Idade</div></div>
-                <div class="card-stat"><div class="card-stat-value">São Paulo, BRA</div><div class="card-stat-label">Nascimento</div></div>
-                <div class="card-stat"><div class="card-stat-value">Zagueiro</div><div class="card-stat-label">Posição</div></div>
-                <div class="card-stat"><div class="card-stat-value">1.90m</div><div class="card-stat-label">Altura</div></div>
-              </div>
-              <p class="card-bio">
-                Zagueiro mais dominante da Premier League nos últimos anos. Gabriel une força física, liderança e qualidade técnica. Com a Seleção Brasileira, é peça indispensável na busca pelo hexa.
-              </p>
-              <div class="card-club-badge">
-                <i class="bi bi-shield-fill"></i> Arsenal FC — Premier League
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 9. WILLIAM SALIBA -->
-        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="zagueiro">
-          <div class="player-card">
-            <div class="card-avatar-area">
-              <div class="card-number">12</div>
-              <div class="card-avatar">WS</div>
-              <div class="card-position-badge">Zagueiro</div>
-              <div class="card-flag">🇫🇷</div>
-            </div>
-            <div class="card-body-custom">
-              <div class="card-name">William Saliba</div>
-              <div class="card-country">França · Arsenal FC</div>
-              <div class="card-stats">
-                <div class="card-stat"><div class="card-stat-value">23</div><div class="card-stat-label">Idade</div></div>
-                <div class="card-stat"><div class="card-stat-value">Bondy, FRA</div><div class="card-stat-label">Nascimento</div></div>
-                <div class="card-stat"><div class="card-stat-value">Zagueiro</div><div class="card-stat-label">Posição</div></div>
-                <div class="card-stat"><div class="card-stat-value">1.92m</div><div class="card-stat-label">Altura</div></div>
-              </div>
-              <p class="card-bio">
-                Revelação que se tornou titular absoluto do Arsenal e da França. Com apenas 23 anos, Saliba já é considerado um dos melhores zagueiros do mundo por sua calma, leitura e imponência física.
-              </p>
-              <div class="card-club-badge">
-                <i class="bi bi-shield-fill"></i> Arsenal FC — Premier League
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 10. Nuno Mendes -->
-        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="zagueiro">
-          <div class="player-card">
-            <div class="card-avatar-area">
-              <div class="card-number">25</div>
-              <div class="card-avatar">WS</div>
-              <div class="card-position-badge">Zagueiro</div>
-              <div class="card-flag">🇫🇷</div>
-            </div>
-            <div class="card-body-custom">
-              <div class="card-name">Nuno Mendes</div>
-              <div class="card-country">Portugal · PSG</div>
-              <div class="card-stats">
-                <div class="card-stat"><div class="card-stat-value">23</div><div class="card-stat-label">Idade</div></div>
-                <div class="card-stat"><div class="card-stat-value">Sintra, POR</div><div class="card-stat-label">Nascimento</div></div>
-                <div class="card-stat"><div class="card-stat-value">Lateral Esquerdo</div><div class="card-stat-label">Posição</div></div>
-                <div class="card-stat"><div class="card-stat-value">1.80m</div><div class="card-stat-label">Altura</div></div>
-              </div>
-              <p class="card-bio">
-                Formado no Sporting CP, ele atua pelo Paris Saint-Germain. Conhecido pela velocidade, força física e qualidade técnica, ele conquistou a UEFA Champions League e é um dos pilares da Seleção Portuguesa.evelação que se tornou titular absoluto do Arsenal e da França. Com apenas 23 anos, Saliba já é considerado um dos melhores zagueiros do mundo por sua calma, leitura e imponência física.
-              </p>
-              <div class="card-club-badge">
-                <i class="bi bi-shield-fill"></i> Paris Saint-Germain — Ligue 1
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 11. DAVID RAYA -->
-        <div class="col-sm-6 col-lg-4 reveal player-item" data-pos="goleiro">
-          <div class="player-card">
-            <div class="card-avatar-area">
-              <div class="card-number">1</div>
-              <div class="card-avatar">DR</div>
-              <div class="card-position-badge">Goleiro</div>
-              <div class="card-flag">🇪🇸</div>
-            </div>
-            <div class="card-body-custom">
-              <div class="card-name">David Raya</div>
-              <div class="card-country">Espanha · Arsenal FC</div>
-              <div class="card-stats">
-                <div class="card-stat"><div class="card-stat-value">29</div><div class="card-stat-label">Idade</div></div>
-                <div class="card-stat"><div class="card-stat-value">Barcelona, ESP</div><div class="card-stat-label">Nascimento</div></div>
-                <div class="card-stat"><div class="card-stat-value">Goleiro</div><div class="card-stat-label">Posição</div></div>
-                <div class="card-stat"><div class="card-stat-value">1.83m</div><div class="card-stat-label">Altura</div></div>
-              </div>
-              <p class="card-bio">
-                Goleiro titular do Arsenal e da Espanha. Eleito melhor goleiro da Premier League, Raya se destaca pelos pés habilidosos — um goleiro moderno que participa ativamente da construção das jogadas.
-              </p>
-              <div class="card-club-badge">
-                <i class="bi bi-shield-fill"></i> Arsenal FC — Premier League
-              </div>
-            </div>
-          </div>
-        </div>
-      </div><!-- /#playersGrid -->
-    </div>
+    {% endfor %}
   </section>
 
 {% endblock %}
